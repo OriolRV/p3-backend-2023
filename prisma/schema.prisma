@@ -9,3 +9,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Disease {        
+  id Int @id @default(autoincrement())
+  name String @unique                      
+  affectedPatient Patient[] @relation("PatientDisease")
+  associatedPhenotype Phenotype[] @relation("PhenotypeDisease")
+  causingGenes Gene[] @relation("GeneDisease")
+  }
+
+model Gene {
+  id Int @id @default(autoincrement())
+  name String @unique 
+  producedDiseases Disease[] @relation("GeneDisease")
+}
+
+model Phenotype {
+  id Int @id @default(autoincrement())
+  name String @unique  
+  causingDisease Disease[] @relation("PhenotypeDisease")
+}
+
+model Patient {
+  id Int @id @default(autoincrement())
+  fullName String
+  diagnosisDate DateTime @default(now()) 
+  country String
+  firstCaseFamily Boolean
+  diagnosedDiseases Disease[] @relation("PatientDisease")
+}
