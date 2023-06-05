@@ -15,7 +15,7 @@ dotenv.config();
 app.use(defaultErrorHandler);
 
 //Creation and setting of an endpoint route.
-app.use("/disease", diseaseRouter);
+app.use(["/disease", "/gene", "/patient", "/phenotype"], diseaseRouter);
 
 //All errors shoould end up here.
 app.use(defaultErrorHandler);
