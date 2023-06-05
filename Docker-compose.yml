@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  ddb:
+    image: postgres
+    container_name: ddb
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=d1s34s3db
+      - POSTGRES_DB=ddb
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:
