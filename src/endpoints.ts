@@ -22,7 +22,7 @@ router.get(
 	errorChecked(async (req, res) => {
 		const target = req.originalUrl.split("/")[1];
 		const result = await prisma[target].findMany({});
-		res.status(200).json({ [target + "s"]: result, ok: true });
+		res.status(200).json({ [target + "s"]: result });
 	})
 );
 
@@ -41,11 +41,20 @@ router.get(
 		} else {
 			res.status(200).json(result);
 		}
-		res.status(200).json({ [target + "s"]: result, ok: true });
+		res.status(200).json({ [target + "s"]: result });
 	})
 );
 
 //POST
+router.post(
+	"/",
+	errorChecked(async (req, res) => {
+		const target = req.originalUrl.split("/")[1];
+		const result = await prisma[target].create({ data: req.body });
+		res.status(200).json({ result });
+	})
+);
+
 //PUT
 
 //DELETE endpoint for a specific entry of a specific entity type
