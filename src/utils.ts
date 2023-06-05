@@ -1,5 +1,5 @@
 //Type import
-import { ErrorRequestHandler, RequestHandler } from "express";
+import { ErrorRequestHandler, RequestHandler, Request } from "express";
 
 //Function to handle errors, just onwe type at the momment (should be expanded)
 export const defaultErrorHandler: ErrorRequestHandler = (
@@ -24,3 +24,8 @@ export const errorChecked = (handler: RequestHandler): RequestHandler => {
 		}
 	};
 };
+
+//Interface to save request's id.
+export interface RequestWithId extends Request {
+	requestId: number;
+}
