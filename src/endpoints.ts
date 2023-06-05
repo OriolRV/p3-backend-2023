@@ -7,6 +7,7 @@ const router = Router();
 //Endpoints map
 //GET all [entity name] entries.
 //GET a specific [entity name] entry by ID.
+//DELETE a specific [entity name] entry by ID.
 
 //Store request's ID in requests's body
 router.use("/:id", async (req: RequestWithId, res, next) => {
@@ -45,6 +46,19 @@ router.get(
 );
 
 //POST
+//PUT
+
+//DELETE endpoint for a specific entry of a specific entity type
+router.delete(
+	"/:id",
+	errorChecked(async (req, res) => {
+		const target = req.originalUrl.split("/")[1];
+		const result = await prisma[target].delete({
+			where: { id: Number(req.params.id) },
+		});
+		res.status(200).json(result);
+	})
+);
 
 //Exports the endpoints created in this file.
 export default router;
