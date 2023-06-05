@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import endpointRouter from "./endpoints.js";
+import firstEndpoint from "./firstStageEndpoints.js";
 import { defaultErrorHandler } from "./utils.js";
 
 //App is created and modules are activated.
@@ -15,7 +15,7 @@ dotenv.config();
 app.use(defaultErrorHandler);
 
 //Creation and setting an endpoint route.
-app.use(["/disease", "/gene", "/patient", "/phenotype"], endpointRouter);
+app.use(["/disease", "/gene", "/patient", "/phenotype"], firstEndpoint);
 
 //All errors shoould end up here.
 app.use(defaultErrorHandler);

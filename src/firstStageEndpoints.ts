@@ -2,6 +2,7 @@
 import prisma from "./prisma-client.js";
 import { Router } from "express";
 import { errorChecked, RequestWithId } from "./utils.js";
+import secondEndpoints from "./secondStageEndpoints.js";
 const router = Router();
 
 //Endpoints map
@@ -81,6 +82,8 @@ router.delete(
 		res.status(200).json(result);
 	})
 );
+
+router.use("/:id/diagnosis", secondEndpoints);
 
 //Exports the endpoints created in this file.
 export default router;
